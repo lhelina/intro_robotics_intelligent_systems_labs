@@ -156,6 +156,8 @@ The IMU publishes:
 <img width="500" height="250" alt="image" src="https://github.com/user-attachments/assets/e9869c19-d3bc-4d80-83a3-c2f1e4427025" />
 
 <img width="1000" height="650" alt="image" src="https://github.com/user-attachments/assets/ff9e15ff-cac1-423d-ae60-320ab77e5134" />
+<img width="1000" height="400" alt="image" src="https://github.com/user-attachments/assets/00e19f59-00d9-482b-aca3-789146952f3e" />
+
 
 ## 11. Notes and Issues
 
