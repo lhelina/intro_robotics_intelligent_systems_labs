@@ -3,8 +3,8 @@
 <package format="3">
   <name>my_robot_nodes</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="helina@todo.todo">helina</maintainer>
+  <description>Python nodes for robot movement and obstacle avoidance.</description>
+  <maintainer email="hilinaashenafi38@gmail.com">Hilina Ashenafi</maintainer>
   <license>MIT</license>
 
   <depend>rclpy</depend>

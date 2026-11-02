@@ -62,9 +62,19 @@ class DriveDistanceServer(Node):
         self.too_close = msg.too_close
 
     def on_goal(self, goal):
-        if goal.distance <= 0.0 or self.position is None:
-            return GoalResponse.REJECT
-        return GoalResponse.ACCEPT
+    if goal.distance <= 0.0:
+        self.get_logger().warning(
+            "Rejected goal: distance must be greater than zero."
+        )
+        return GoalResponse.REJECT
+
+    if self.position is None or self.yaw is None:
+        self.get_logger().warning(
+            "Rejected goal: waiting for odometry."
+        )
+        return GoalResponse.REJECT
+
+    return GoalResponse.ACCEPT
 
     def execute(self, goal_handle):
         goal = goal_handle.request.distance

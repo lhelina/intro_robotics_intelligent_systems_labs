@@ -22,8 +22,11 @@ setup(
             'pytest',
         ],
     },
-    entry_points={
-        'console_scripts': [
-        ],
-    },
+   entry_points={
+    'console_scripts': [
+        'turn_away = my_robot_nodes.turn_away:main',
+        'rotate_server = my_robot_nodes.rotate_server:main',
+        'square_driver = my_robot_nodes.square_driver:main',
+    ],
+},
 )
