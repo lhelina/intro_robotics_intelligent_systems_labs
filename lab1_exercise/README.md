@@ -149,10 +149,11 @@ The IMU publishes:
 
 ## 10. Screenshots
 
-<img width="987" height="883" alt="image" src="https://github.com/user-attachments/assets/99562683-ba67-4f32-b08b-b9b8369b92ba" />
+<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/99562683-ba67-4f32-b08b-b9b8369b92ba" />
 
-<img width="1267" height="483" alt="image" src="https://github.com/user-attachments/assets/493fb1dc-baa4-4d47-b6e5-202e4068ae80" />
-![Uploading image.png…]()
+<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/493fb1dc-baa4-4d47-b6e5-202e4068ae80" />
+<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/e9869c19-d3bc-4d80-83a3-c2f1e4427025" />
+
 
 
 ### RViz – Depth Image and Point Cloud
