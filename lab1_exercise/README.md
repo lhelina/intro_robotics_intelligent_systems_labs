@@ -1,190 +1,172 @@
-ROS 2 Lab 1 – Robot Sensors, Obstacle Avoidance and Actions
+# ROS 2 Lab 1 – Robot Sensors, Obstacle Avoidance, and Actions
 
-1. Project Overview
+## 1. Project Overview
 
 This project extends the differential-drive robot with additional sensors, custom ROS 2 interfaces, obstacle avoidance, and action-based movement.
 
 The robot uses:
 
-A depth camera to produce depth images and point clouds.
+- A depth camera that produces depth images and point clouds.
+- An IMU that provides orientation and motion data.
+- An obstacle avoidance node that controls the robot.
+- Custom messages, services, and actions.
+- An action client that drives the robot in a square.
 
-An IMU to provide orientation and motion data.
-
-An obstacle avoidance node to control the robot.
-
-Custom messages, services, and actions.
-
-An action client that makes the robot drive in a square.
-
-2. Package Structure
+## 2. Package Structure
 
 The exercise contains four packages:
 
-Package
+| Package | Description |
+|---|---|
+| `diffdrive_bot` | Robot model, sensors, Gazebo simulation, and existing controllers |
+| `lab_interfaces` | Existing obstacle information message and other interfaces |
+| `my_robot_interfaces` | Custom robot status message, turn-speed service, and rotation action |
+| `my_robot_nodes` | Python nodes for obstacle avoidance, rotation, and square movement |
 
-Description
+## 3. Requirements
 
-diffdrive_bot
-
-Robot model, sensors, Gazebo simulation, and existing controllers
-
-lab_interfaces
-
-Existing obstacle information message and other interfaces
-
-my_robot_interfaces
-
-Custom robot status message, turn-speed service, and rotation action
-
-my_robot_nodes
-
-Python nodes for obstacle avoidance, rotation, and square movement
-
-3. Requirements
-
-Ubuntu 22.04
-
-ROS 2 Humble
-
-Gazebo Harmonic
-
-Python 3
-
-Colcon
+- Ubuntu 22.04
+- ROS 2 Humble
+- Gazebo Harmonic
+- Python 3
+- Colcon
 
 Source ROS 2 before building:
 
+```bash
 source /opt/ros/humble/setup.bash
+```
 
-4. Build the Workspace
+## 4. Build the Workspace
 
-From the workspace root:
+From the workspace root, run:
 
+```bash
 cd ~/ros2_ws
 source /opt/ros/humble/setup.bash
 colcon build --symlink-install
 source install/setup.bash
+```
 
-5. Custom Interfaces
+## 5. Custom Interfaces
 
-The my_robot_interfaces package contains:
+The `my_robot_interfaces` package contains the following interfaces.
 
-RobotStatus.msg
+**`RobotStatus.msg`** — publishes the robot's current state and obstacle distance:
 
+```text
 string state
 float32 obstacle_distance
+```
 
-Publishes the robot's current state and obstacle distance.
+**`SetTurnSpeed.srv`** — changes the robot's turning speed:
 
-SetTurnSpeed.srv
-
+```text
 float32 turn_speed
 ---
 bool success
 string message
+```
 
-Changes the robot's turning speed.
+**`Rotate.action`** — requests a rotation and provides feedback about the angle turned:
 
-Rotate.action
-
+```text
 float32 angle
 ---
 float32 turned
 ---
 float32 turned
+```
 
-Requests a rotation and provides feedback about the angle turned.
+## 6. Obstacle Avoidance
 
-6. Obstacle Avoidance
+The `turn_away` node:
 
-The turn_away node:
+- Subscribes to `/obstacle`.
+- Publishes velocity commands to `/cmd_vel`.
+- Publishes robot status to `/robot_status`.
+- Uses `/turn_away_enable` to enable or disable obstacle avoidance.
+- Uses `/set_turn_speed` to change the turning speed.
 
-Subscribes to /obstacle.
+Run the node with:
 
-Publishes velocity commands to /cmd_vel.
-
-Publishes robot status to /robot_status.
-
-Uses /turn_away_enable to enable or disable obstacle avoidance.
-
-Uses /set_turn_speed to change the turning speed.
-
-Run:
-
+```bash
 ros2 run my_robot_nodes turn_away
+```
 
-7. Rotation Action Server
+## 7. Rotation Action Server
 
-The rotate_server node:
+The `rotate_server` node:
 
-Provides the /rotate action.
+- Provides the `/rotate` action.
+- Uses `/odom` to measure the robot's rotation.
+- Supports positive angles for left turns and negative angles for right turns.
+- Publishes feedback while rotating.
+- Stops the robot when the goal completes or is cancelled.
 
-Uses /odom to measure the robot's rotation.
+Run the node with:
 
-Supports positive angles for left turns and negative angles for right turns.
-
-Publishes feedback while rotating.
-
-Stops the robot when the goal completes or is cancelled.
-
-Run:
-
+```bash
 ros2 run my_robot_nodes rotate_server
+```
 
-8. Square Movement
+## 8. Square Movement
 
-The square_driver node uses:
+The `square_driver` node uses:
 
-/drive_distance to move forward.
+- `/drive_distance` to move forward.
+- `/rotate` to turn left by 90 degrees.
 
-/rotate to turn left by 90 degrees.
+Run the complete simulation with:
 
-Run the complete simulation:
-
+```bash
 ros2 launch diffdrive_bot square.launch.py
+```
 
-To change the side length:
+To change the side length, run:
 
+```bash
 ros2 launch diffdrive_bot square.launch.py side_length:=0.8
+```
 
-The default side length is 0.5 meters. The maximum allowed side length is 1 meter.
+The default side length is 0.5 meters, and the maximum allowed side length is 1 meter.
 
-9. Sensors
+## 9. Sensors
 
-Depth Camera
+### Depth Camera
 
 The depth camera publishes:
 
-/depth_camera/image
+- `/depth_camera/image`
+- `/depth_camera/points`
+- `/depth_camera/camera_info`
 
-/depth_camera/points
-
-/depth_camera/camera_info
-
-IMU
+### IMU
 
 The IMU publishes:
 
-/imu
+- `/imu`
 
-10. Screenshots
+## 10. Screenshots
 
 Add the required screenshots after running the simulation.
 
-RViz – Depth Image and Point Cloud
+### RViz – Depth Image and Point Cloud
 
 Add screenshot here.
 
-rqt_graph – Square Movement
+### rqt_graph – Square Movement
 
-Add screenshot of rqt_graph while square.launch.py is running here.
+Add a screenshot of `rqt_graph` while `square.launch.py` is running here.
 
-11. Notes and Issues
+## 11. Notes and Issues
 
 Add any implementation issues, errors encountered, and their solutions after the final build and simulation.
 
-12. Repository
+## 12. Repository
 
 GitHub repository:
 
+```text
 https://github.com/lhelina/intro_robotics_intelligent_systems_labs
+```
