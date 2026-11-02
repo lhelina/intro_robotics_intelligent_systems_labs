@@ -151,7 +151,9 @@ The IMU publishes:
 
 <img width="987" height="883" alt="image" src="https://github.com/user-attachments/assets/99562683-ba67-4f32-b08b-b9b8369b92ba" />
 
+<img width="1267" height="483" alt="image" src="https://github.com/user-attachments/assets/493fb1dc-baa4-4d47-b6e5-202e4068ae80" />
 ![Uploading image.png…]()
+
 
 ### RViz – Depth Image and Point Cloud
 
