@@ -149,7 +149,9 @@ The IMU publishes:
 
 ## 10. Screenshots
 
-Add the required screenshots after running the simulation.
+<img width="987" height="883" alt="image" src="https://github.com/user-attachments/assets/99562683-ba67-4f32-b08b-b9b8369b92ba" />
+
+![Uploading image.png…]()
 
 ### RViz – Depth Image and Point Cloud
 
